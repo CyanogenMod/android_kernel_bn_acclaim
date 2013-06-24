@@ -6262,6 +6262,7 @@ static int ftx_input_device_initialize(struct ft5x06 *ts)
 			 * Use Type A protocol
 			 */
 			ftx_input_switch_protocol(ts, FTX_MT_PROTOCOL_A);
+			input_set_events_per_packet(input_device, 6 * FT_NUM_MT_TCH_ID);
 			DBG_PRINT(dbg_level_info, "%s: " FTX_TAG ": %s(): INFO: Failed to initialze slots; using Type A protocol.\n", dev_name(&ts->client->dev), __func__);
 		}
 		else

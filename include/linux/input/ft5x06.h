@@ -476,7 +476,7 @@
 #define FT_NUM_ST_TCH_ID        2
 
 /* maximum number of concurrent MT track IDs */
-#define FT_NUM_MT_TCH_ID        4
+#define FT_NUM_MT_TCH_ID        10
 
 /* maximum number of track IDs */
 #define FT_NUM_TRK_ID           16
