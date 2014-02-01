@@ -693,7 +693,6 @@ static void omap4_panda_hdmi_mux_init(void)
 static void omap4_panda_panel_disable_hdmi(struct omap_dss_device *dssdev)
 {
 	gpio_free_array(panda_hdmi_gpios, ARRAY_SIZE(panda_hdmi_gpios));
->>>>>>> a96dbfbcb58afeec72c2a0a03d205e0e1457ea3d
 }
 
 static struct omap_dss_hdmi_data omap4_panda_hdmi_data = {
