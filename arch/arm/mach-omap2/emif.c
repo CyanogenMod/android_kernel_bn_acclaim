@@ -546,8 +546,6 @@ static u32 get_ddr_phy_ctrl_1(u32 freq, u8 RL)
 		val = EMIF_DLL_SLAVE_DLY_CTRL_100_MHZ_AND_LESS;
 	else if (freq <= 200000000)
 		val = EMIF_DLL_SLAVE_DLY_CTRL_200_MHZ;
-	else if (freq <= 233333333)
-		val = EMIF_DLL_SLAVE_DLY_CTRL_233_MHZ;
 	else if (freq <= 400000000)
 		val = EMIF_DLL_SLAVE_DLY_CTRL_400_MHZ;
 	else
@@ -1049,10 +1047,10 @@ static void emif_calculate_regs(const struct emif_device_details *devices,
 	regs->ref_ctrl = get_sdram_ref_ctrl(freq, addressing);
 	regs->ref_ctrl_derated = regs->ref_ctrl / 4;
 	switch (freq) {
-	case LPDDR2_466MHZ:
+	case LPDDR2_400MHZ:
 		regs->ref_ctrl -= 2;
 		break;
-	case LPDDR2_233MHZ:
+	case LPDDR2_200MHZ:
 		regs->ref_ctrl -= 1;
 		break;
 	default:
@@ -1070,10 +1068,10 @@ static void emif_calculate_regs(const struct emif_device_details *devices,
 	regs->sdram_tim2 = get_sdram_tim_2_reg(timings, min_tck);
 
 	switch (freq) {
-	case LPDDR2_466MHZ:
+	case LPDDR2_400MHZ:
 		regs->sdram_tim3 = 0x00D4E3CF;
 		break;
-	case LPDDR2_233MHZ:
+	case LPDDR2_200MHZ:
 		regs->sdram_tim3 = 0x006A21EF;
 		break;
 	default:
