@@ -187,10 +187,10 @@ config MACH_OMAP3EVM
 
 config FORCE_SILICON_PERFORMANCE
 	bool "Force SILICON_TYPE_PERFORMANCE setting (1.2Ghz)"
-	depends on MACH_OMAP_4430_KC1
+	depends on MACH_OMAP4_NOOKTABLET
 	default N
 	help
-	  Enables the SILICON_TYPE_PERFORMANCE flag for CPU settings.  This puts the OMAP4430's max at 1.2Ghz.
+	Enables the SILICON_TYPE_PERFORMANCE flag for CPU settings.  This puts the OMAP4430's max at 1.2Ghz.
 
 config WIFI_CONTROL_FUNC
 	bool "Enable WiFi control function abstraction"
