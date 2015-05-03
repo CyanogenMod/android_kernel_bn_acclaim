@@ -277,13 +277,13 @@ static int shm_release(struct inode *ino, struct file *file)
 	return 0;
 }
 
-static int shm_fsync(struct file *file, int datasync)
+static int shm_fsync(struct file *file, loff_t start, loff_t end, int datasync)
 {
 	struct shm_file_data *sfd = shm_file_data(file);
 
 	if (!sfd->file->f_op->fsync)
 		return -EINVAL;
-	return sfd->file->f_op->fsync(sfd->file, datasync);
+	return sfd->file->f_op->fsync(sfd->file, start, end, datasync);
 }
 
 static unsigned long shm_get_unmapped_area(struct file *file,
@@ -343,7 +343,7 @@ static int newseg(struct ipc_namespace *ns, struct ipc_params *params)
 	size_t size = params->u.size;
 	int error;
 	struct shmid_kernel *shp;
-	int numpages = (size + PAGE_SIZE -1) >> PAGE_SHIFT;
+	size_t numpages = (size + PAGE_SIZE - 1) >> PAGE_SHIFT;
 	struct file * file;
 	char name[13];
 	int id;
