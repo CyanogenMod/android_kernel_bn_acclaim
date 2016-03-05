@@ -207,7 +207,13 @@ static void set_ion_carveouts(struct sgx_omaplfb_config *sgx_config,
 			     struct omap_ion_platform_data *ion,
 			     struct omap_android_display_data *mem)
 {
-	u32 alloc_pages, width;
+ #ifdef CONFIG_ION_OMAP_TILER_DYNAMIC_ALLOC
+	ion->nonsecure_tiler2d_size = 0;
+	ion->tiler2d_size = 0;
+ #else
+	u32 width;
+	u32 alloc_pages;
+
 	enum tiler_fmt fmt;
 	u32 num_buffers = 2;
 
@@ -243,7 +249,7 @@ static void set_ion_carveouts(struct sgx_omaplfb_config *sgx_config,
 	 */
 	if (1 /* !cpu_is_omap54xx() */)
 		ion->tiler2d_size -= ALIGN(mem->tiler1d_mem, PAGE_SIZE * 32);
-
+#endif
 	pr_info("android_display: ion carveouts: %u tiler2d, %u nonsecure\n",
 		ion->tiler2d_size, ion->nonsecure_tiler2d_size);
 }
